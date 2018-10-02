@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 )
 
 func main() {
-	fmt.Println("Welcom to the play groud!")
-	fmt.Println("The time is", time.Now())
+	rand.Seed(time.Now().UnixNano())
+	fmt.Println("My favorite number is", rand.Intn(10))
 }
