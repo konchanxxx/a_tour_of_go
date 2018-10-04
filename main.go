@@ -2,17 +2,24 @@ package main
 
 import "fmt"
 
-func adder() func(int) int {
-	sum := 0
-	return func(x int) int {
-		sum += x
-		return sum
+func fibonacci() func() int {
+	pre := 0
+	next := 1
+	expected := 0
+
+	return func() int {
+		defer func() {
+			expected = next
+			next = expected + pre
+			pre = expected
+		}()
+		return expected
 	}
 }
 
 func main() {
-	pos, neg := adder(), adder()
+	f := fibonacci()
 	for i := 0; i < 10; i++ {
-		fmt.Println(pos(i), neg(-2*i))
+		fmt.Println(f())
 	}
 }
