@@ -1,21 +1,15 @@
 package main
 
-import "golang.org/x/tour/pic"
+import "fmt"
 
-func Pic(dx, dy int) [][]uint8 {
-	image := make([][]uint8, dy)
-	for y := range image {
-		image[y] = make([]uint8, dx)
-	}
-
-	for y := 0; y < dy; y++ {
-		for x := 0; x < dx; x++ {
-			image[y][x] = uint8(x * y)
-		}
-	}
-	return image
+type Vertex struct {
+	Lat, Long float64
 }
 
 func main() {
-	pic.Show(Pic)
+	m := map[string]Vertex{}
+	m["Bell Labs"] = Vertex{
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["Bell Labs"])
 }
