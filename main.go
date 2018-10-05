@@ -1,25 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"math"
+	"fmt"
+)
 
-func fibonacci() func() int {
-	pre := 0
-	next := 1
-	expected := 0
+type Vertex struct {
+	X, Y float64
+}
 
-	return func() int {
-		defer func() {
-			expected = next
-			next = expected + pre
-			pre = expected
-		}()
-		return expected
-	}
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
 func main() {
-	f := fibonacci()
-	for i := 0; i < 10; i++ {
-		fmt.Println(f())
-	}
+	v := Vertex{3, 4}
+	fmt.Println(v.Abs())
 }
