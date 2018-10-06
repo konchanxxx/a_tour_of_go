@@ -1,12 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"golang.org/x/tour/pic"
 	"image"
+	"image/color"
 )
 
+type Image struct{}
+
+func (i Image) ColorModel() color.Model {
+	return color.RGBAModel
+}
+
+func (i Image) Bounds() image.Rectangle {
+	return image.Rect(0, 0, 256, 256)
+}
+
+func (i Image) At(x, y int) color.Color {
+	return color.RGBA{uint8(x), uint8(y), 255, 255}
+}
+
 func main() {
-	m := image.NewRGBA(image.Rect(0, 0, 100, 100))
-	fmt.Println(m.Bounds())
-	fmt.Println(m.At(0, 0).RGBA())
+	m := Image{}
+	pic.ShowImage(m)
 }
